@@ -1,19 +1,25 @@
-const {Schema, model} = require('mongoose');
+const {Schema, model } = require('mongoose');
 
 const UserSchema = new Schema(
     {
       username: {
         type: String,
         unique: true,
-        required: true,
+        required: "username required!",
         trim: true
       },
       email: {
         type: String,
         unique: true,
-        required: true,
-        match: /.+\@.+\..+/
-      }
+        required: "email address is required!",
+        match: [/.+\@.+\..+/, "Please enter a valid email address!"]
+      },
+      thoughts: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Thought",
+        },
+      ]
 });
 
 //Create User model with schema
