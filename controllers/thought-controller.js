@@ -61,11 +61,11 @@ const thoughtController = {
   },
 
   //Update a thought
-  updateThought({params, body}, res) {
+  updateThought({ params, body }, res) {
     Thought.findOneAndUpdate(
-      {_id: params.thoughtId},
-      {thoughtBody: body.thoughtBody},
-      {new: true, runValidators: true}
+      { _id: params.thoughtId },
+      { thoughtBody: body.thoughtBody },
+      { new: true, runValidators: true }
     )
     .then(dbThoughtData => {
       if(!dbThoughtData) {
@@ -80,7 +80,7 @@ const thoughtController = {
 
   //delete thought
   deleteThought({ params }, res) {
-      Thought.findOneAndDelete({_id: params.thoughtId})
+      Thought.findOneAndDelete({ _id: params.thoughtId })
         .then(deletedThought => {
           //check if thought exists
           if(!deletedThought) {
@@ -108,7 +108,7 @@ const thoughtController = {
       .then(dbUserData => {
         //check if user exists
         if(!dbUserData) {
-          res.status(400).json({message: 'Incorrect user information! Please try again!!'});
+          res.status(400).json({message: 'User not found!'});
           return;
         };
         //if exists, get the username and add
